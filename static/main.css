@@ -33,17 +33,20 @@ body {
 }
 
 .kaogaii-header > button {
+  border: none;
+  height: 3.5rem;
+  padding: 0.2rem 0.6rem;
   cursor: pointer;
   position: absolute;
   right: 2.5%;
   margin-top: 1rem;
-  font-size: 2rem;
+  font-size: 1.75rem;
   transition: filter 0.25s;
 }
 
 .kaogaii-imoge {
   margin: 0 auto;
-  max-width: 600px;
+  max-width: 500px;
   width: 100vw;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -70,9 +73,9 @@ body {
 }
 
 .kaogaii-toggle {
-  max-width: 50rem;
+  max-width: 40rem;
   background-color: yellow;
-  display: flex;
+  display: none;
   justify-content: center;
   flex-direction: column;
   gap: 1rem;
@@ -84,7 +87,16 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.kaogaii-toggle > input {
+.kaogaii-toggle-layout {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.kaogaii-toggle-layout > input {
   margin: 0 auto;
   width: 20rem;
   height: 4rem;
@@ -93,17 +105,38 @@ body {
   padding: 0.5rem;
 }
 
-.kaogaii-save_comment {
-  border: none;
-  font-size: 1.5rem;
+.kaogaii-btns {
+  display: flex;
+  justify-content: space-around;
   align-self: center;
-  margin-top: 1rem;
-  width: 150px;
+  align-items: center;
+  gap: 1rem;
+}
+
+.kaogaii-btns > li > button {
   height: 3rem;
+  width: 7rem;
+  border: 0;
+  color: white;
+  font-size: medium;
   cursor: pointer;
+  border-radius: 0.2rem;
+  transition: 0.25s background-color;
+}
+
+.kaogaii-close_toggle {
+  background-color: #ea4236;
+}
+
+.kaogaii-close_toggle:hover {
+  background-color: #ad2f26;
+}
+
+.kaogaii-save_comment {
+  background-color: #4286f5;
   transition: 0.25s background-color;
 }
 
 .kaogaii-save_comment:hover {
-  background-color: rgb(199, 195, 195);
+  background-color: #3c74ce;
 }

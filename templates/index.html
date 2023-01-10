@@ -22,37 +22,52 @@
       </ul>
       <footer class="kaogaii-footer">© 2023. kaogaii</footer>
       <section class="kaogaii-toggle">
-        <input
-          type="text"
-          class="name"
-          placeholder="추가할 이름"
-          required
-          name="name"
-        />
-        <input
-          type="text"
-          class="link"
-          placeholder="이미지 링크"
-          required
-          name="img"
-        />
-        <button
-          type="button"
-          onclick="save_comment()"
-          class="kaogaii-save_comment"
-        >
-          가수 남기기
-        </button>
+        <div class="kaogaii-toggle-layout">
+          <input
+            type="text"
+            class="name"
+            placeholder="추가할 이름"
+            required
+            name="name"
+          />
+          <input
+            type="text"
+            class="link"
+            placeholder="이미지 링크"
+            required
+            name="img"
+          />
+          <ul class="kaogaii-btns">
+            <li>
+              <button onclick="close_toggle()" class="kaogaii-close_toggle">
+                닫기
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                onclick="save_comment()"
+                class="kaogaii-save_comment"
+              >
+                남기기!
+              </button>
+            </li>
+          </ul>
+        </div>
       </section>
     </div>
     <script>
       function toggle_box() {
-        $(".kaogaii-toggle").toggle();
+        $(".kaogaii-toggle").show();
       }
+
+      function close_toggle() {
+        $(".kaogaii-toggle").hide();
+      }
+
       function save_comment() {
         let name = $(".name").val();
         let link = $(".link").val();
-
         $.ajax({
           type: "POST",
           url: "/idol",
