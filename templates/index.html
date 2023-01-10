@@ -13,13 +13,7 @@
       <header class="kaogaii-header">
         <button onclick="toggle_box()" class="fan-box">팬명록 추가하기</button>
       </header>
-      <ul class="kaogaii-imoge">
-        <li>아이유</li>
-        <li>소녀시대</li>
-        <li>뉴진스</li>
-        <li>마마무</li>
-        <li>박효신</li>
-      </ul>
+      <ul class="kaogaii-imoge"></ul>
       <footer class="kaogaii-footer">© 2023. kaogaii</footer>
       <section class="kaogaii-toggle">
         <div class="kaogaii-toggle-layout">
@@ -28,12 +22,15 @@
             class="name"
             placeholder="추가할 이름"
             required
+            minlength="2"
+            maxlength="10"
             name="name"
           />
           <input
             type="text"
             class="link"
             placeholder="이미지 링크"
+            minlength="1"
             required
             name="img"
           />
@@ -46,7 +43,7 @@
             <li>
               <button
                 type="button"
-                onclick="save_comment()"
+                onclick="add_idol()"
                 class="kaogaii-save_comment"
               >
                 남기기!
@@ -57,6 +54,10 @@
       </section>
     </div>
     <script>
+      $(document).ready(function () {
+        show_idol();
+      });
+
       function toggle_box() {
         $(".kaogaii-toggle").show();
       }
@@ -65,15 +66,41 @@
         $(".kaogaii-toggle").hide();
       }
 
-      function save_comment() {
+      function add_idol() {
         let name = $(".name").val();
         let link = $(".link").val();
+        if (name !== "" && link !== "") {
+          $.ajax({
+            type: "POST",
+            url: "/idol",
+            data: { idol_name: name, idol_link: link },
+            success: function (response) {
+              alert(response["msg"]);
+              window.location.reload();
+            },
+          });
+        }
+      }
+
+      function show_idol() {
         $.ajax({
-          type: "POST",
+          type: "GET",
           url: "/idol",
-          data: { idol_name: name, idol_link: link },
+          data: {},
           success: function (response) {
-            console.log(response);
+            let rows = response["idol"];
+            for (let i = 0; i < rows.length; i++) {
+              let name = rows[i]["idol_name"];
+              let p_link = rows[i]["idol_link"];
+              let id = rows[i]["idol_num"];
+
+              let temp_html = ` <li><a href="/fanpage?id=${id}">
+                                  <img src="${p_link}" alt="image">
+                                  <span>${name}</span>
+                                </a></li>`;
+
+              $(".kaogaii-imoge").append(temp_html);
+            }
           },
         });
       }
