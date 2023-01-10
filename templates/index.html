@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>가오가이 | 20조</title>
+  </head>
+  <link rel="stylesheet" href="./static/main.css" />
+  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+  <body>
+    <!-- 헤더 마지막에 추가 버튼 위치하게 하기 -->
+    <!-- 이모지는 뭐 나중에 밥먹고 와야겠다 맛있겠당 -->
+    <div class="kaogaii-wrapper">
+      <header class="kaogaii-header">
+        <button onclick="toggle_box()" class="fan-box">팬명록 추가하기</button>
+      </header>
+      <ul class="kaogaii-imoge">
+        <li>아이유</li>
+        <li>소녀시대</li>
+        <li>뉴진스</li>
+        <li>마마무</li>
+        <li>박효신</li>
+      </ul>
+      <footer class="kaogaii-footer">© 2023. kaogaii</footer>
+      <section class="kaogaii-toggle">
+        <input
+          type="text"
+          class="name"
+          placeholder="추가할 이름"
+          required
+          name="name"
+        />
+        <input
+          type="text"
+          class="link"
+          placeholder="이미지 링크"
+          required
+          name="img"
+        />
+        <button
+          type="button"
+          onclick="save_comment()"
+          class="kaogaii-save_comment"
+        >
+          가수 남기기
+        </button>
+      </section>
+    </div>
+    <script>
+      function toggle_box() {
+        $(".kaogaii-toggle").toggle();
+      }
+      function save_comment() {
+        let name = $(".name").val();
+        let link = $(".link").val();
+
+        $.ajax({
+          type: "POST",
+          url: "/idol",
+          data: { idol_name: name, idol_link: link },
+          success: function (response) {
+            console.log(response);
+          },
+        });
+      }
+    </script>
+  </body>
+</html>
