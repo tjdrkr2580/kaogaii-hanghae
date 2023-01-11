@@ -11,6 +11,10 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
+@app.route('/fanpage')
+def fanpage():
+    return render_template('test.html')
+
 
 @app.route("/idol", methods=["POST"])
 def idol_post():
@@ -35,11 +39,12 @@ def idol_get():
     idol_list = list(db.idol.find({},{'_id':False}))
     return jsonify({'idol':idol_list})
 
-@app.route('/fanpage', methods=["GET"])
+@app.route('/fanpage', methods=["POST"])
 def fanpage_go():
     #jk fanpage go func
-    tmp = request.args.get('id')
-    return render_template('test.html', id = tmp)
+    idol_id = request.form['idol_id']
+    user_list = list(db.idol.find({'idol_num':int(idol_id)},{'_id':False}))
+    return jsonify({'msg':user_list})
 
 
 if __name__ == '__main__':

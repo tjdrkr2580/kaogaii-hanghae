@@ -104,6 +104,17 @@
           },
         });
       }
+
+      function show_idols() {
+        $.ajax({
+          type: "GET",
+          url: "/fanpage",
+          data: {},
+          success: function (response) {
+            console.log(response);
+          },
+        });
+      }
     </script>
   </body>
 </html>
