@@ -8,6 +8,7 @@
     <title>Document</title>
   </head>
   <body>
+    <div class="kaogaii-wrapper"></div>
     <script>
       $(document).ready(function () {
         show_idol();
@@ -27,6 +28,10 @@
               let id = rows[i]["idol_num"];
               if (id == Number(a)) {
                 console.log(rows[i]);
+                let name = rows[i]["idol_name"];
+                let link = rows[i]["idol_link"];
+                let temp_html = `<h1>${name}</h1> <img src="${link}" alt="image"/>`;
+                $(".kaogaii-wrapper").append(temp_html);
               }
             }
           },
