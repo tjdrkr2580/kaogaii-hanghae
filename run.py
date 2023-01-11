@@ -15,7 +15,6 @@ def home():
 def fanpage():
     return render_template('test.html')
 
-
 @app.route("/idol", methods=["POST"])
 def idol_post():
     # db.idol.insert_one(doc)
@@ -39,12 +38,11 @@ def idol_get():
     idol_list = list(db.idol.find({},{'_id':False}))
     return jsonify({'idol':idol_list})
 
-@app.route('/fanpage', methods=["POST"])
+@app.route('/fanpage', methods=["GET"])
 def fanpage_go():
     #jk fanpage go func
-    idol_id = request.form['idol_id']
-    user_list = list(db.idol.find({'idol_num':int(idol_id)},{'_id':False}))
-    return jsonify({'msg':user_list})
+    user_list = list(db.idol.find({},{'_id':False}))
+    return jsonify({'kdoe':user_list})
 
 
 if __name__ == '__main__':

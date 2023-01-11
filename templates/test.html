@@ -10,24 +10,28 @@
   <body>
     <script>
       $(document).ready(function () {
-        show_id();
+        show_idol();
       });
 
-      function show_id() {
+      function show_idol() {
         let url_href = window.location.href;
         let url = new URL(url_href);
         let a = url.searchParams.get("id");
         $.ajax({
-          type: "POST",
-          url: "/fanpage",
-          data: { idol_id: a },
+          type: "GET",
+          url: "/idol",
+          data: {},
           success: function (response) {
-            console.log(response["msg"]);
+            let rows = response["idol"];
+            for (let i = 0; i < rows.length; i++) {
+              let id = rows[i]["idol_num"];
+              if (id == Number(a)) {
+                console.log(rows[i]);
+              }
+            }
           },
         });
       }
     </script>
   </body>
 </html>
-
-test id = {{ id }}
