@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- <link rel="stylesheet" href="./static/main.css" /> -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <header class="kaogaii-header">
+      <span class="logo">Kaogaii</span>
+      <button class="fan-box"><a href="/">메인으로</a></button>
+    </header>
+    <div class="kaogaii-wrapper"></div>
+    <div>
+      <input class="name" type="text" name="username" placeholder="이름" />
+      <input class="comment" type="text" name="comment" placeholder="코멘트" />
+      <button onclick="save_comment()" class="kaogaii-submit">입력</button>
+      <ul class="kaogaii-comments"></ul>
+    </div>
+    <script>
+      $(document).ready(function () {
+        show_idol();
+        show_comment();
+      });
+
+      function show_idol() {
+        let url_href = window.location.href;
+        let url = new URL(url_href);
+        let a = url.searchParams.get("id");
+        $.ajax({
+          type: "GET",
+          url: "/idol",
+          data: {},
+          success: function (response) {
+            let rows = response["idol"];
+            for (let i = 0; i < rows.length; i++) {
+              let id = rows[i]["idol_num"];
+              if (id == Number(a)) {
+                let name = rows[i]["idol_name"];
+                let link = rows[i]["idol_link"];
+                let temp_html = `<img src="${link}" alt="image"/> <h1>${name}</h1>`;
+                $(".kaogaii-wrapper").append(temp_html);
+              }
+            }
+          },
+        });
+      }
+
+      function save_comment() {
+        let name = $(".name").val();
+        let comment = $(".comment").val();
+        let url_href = window.location.href;
+        let url = new URL(url_href);
+        let a = url.searchParams.get("id");
+
+        $.ajax({
+          type: "POST",
+          url: "/comment",
+          data: { name_give: name, comment_give: comment, num_give: a },
+          success: function (response) {
+            alert(response["msg"]);
+            window.location.reload();
+          },
+        });
+      }
+
+      function show_comment() {
+        let url_href = window.location.href;
+        let url = new URL(url_href);
+        let a = url.searchParams.get("id");
+
+        $.ajax({
+          type: "GET",
+          url: "/comment",
+          data: {},
+          success: function (response) {
+            let idolNum = response["comments"];
+            let temp_html = ``;
+            for (let i = 0; i < idolNum.length; i++) {
+              let num = idolNum[i]["idol_num"];
+              let comment = idolNum[i]["comment"];
+              let name = idolNum[i]["name"];
+              if (a == num) {
+                temp_html = `<li>
+                                  <div><h5>${name}</h5></div>
+                                  <div><h4>${comment}</h4></div>
+                                </li>`;
+                $(".kaogaii-comments").append(temp_html);
+              }
+            }
+          },
+        });
+      }
+    </script>
+  </body>
+</html>

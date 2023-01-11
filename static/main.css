@@ -1,3 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Noto+Sans+KR:wght@300;500&family=Roboto:wght@300;400&display=swap");
+
+/* font-family: 'Noto Sans KR', sans-serif 한글;
+font-family: 'Roboto', sans-serif; 영이 및 숫자 */
+/* font-family: 'Dancing Script', cursive; 로고 */
+
 * {
   font-size: 10px;
   box-sizing: border-box;
@@ -13,63 +19,121 @@ body {
   overflow-x: hidden;
 }
 
+a {
+  color: black;
+}
+
+img {
+  width: 100%;
+  height: 75%;
+}
+
+span {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 1.5rem;
+  align-items: flex-start;
+}
+
 .kaogaii-wrapper {
-  position: relative;
-  min-width: 100vw;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+.padding-t {
+  padding-top: 10rem;
+}
+
+.padding-b {
+  padding-bottom: 10rem;
 }
 
 .kaogaii-header {
-  position: relative;
-  width: 100vw;
+  z-index: 2;
+  max-width: 80rem;
+  padding: 1rem 0;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80vw;
+  height: 6rem;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.logo {
+  background: linear-gradient(270deg, #5845ce 0%, #845cf5 46.87%, #bb65d2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  font-size: 3.5rem;
+  font-family: "Dancing Script", cursive;
 }
 
 .kaogaii-header > button:hover {
-  filter: brightness(75%);
+  filter: brightness(110%);
 }
 
 .kaogaii-header > button {
+  color: white;
+  border-radius: 10rem;
   border: none;
-  height: 3.5rem;
-  padding: 0.2rem 0.6rem;
+  padding: 1rem 2rem;
   cursor: pointer;
   position: absolute;
   right: 2.5%;
-  margin-top: 1rem;
-  font-size: 1.75rem;
+  font-size: 1.6rem;
   transition: filter 0.25s;
+  font-family: "Noto Sans KR", sans-serif;
+  background: linear-gradient(270deg, #5200ff 0%, #845cf5 57.29%, #be63de 100%);
 }
 
 .kaogaii-imoge {
   margin: 0 auto;
-  max-width: 500px;
+  max-width: 51rem;
   width: 100vw;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
 }
 
 .kaogaii-imoge > li {
+  padding: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
   cursor: pointer;
   margin: 0 auto;
   place-items: center;
-  width: 15rem;
-  height: 15rem;
+  width: 17rem;
+  height: 25rem;
   font-size: 2rem;
   text-align: center;
-  transition: letter-spacing 0.25s;
+  background-color: white;
+  transition: filter 0.2s;
 }
 
 .kaogaii-imoge > li:hover {
-  letter-spacing: 0.15rem;
+  filter: brightness(80%);
 }
 
 .kaogaii-footer {
   padding: 0 0 1rem 1rem;
   font-size: 1.75rem;
+}
+
+.kaogaii-footer > .logo {
+  background: linear-gradient(270deg, #5845ce 0%, #845cf5 46.87%, #bb65d2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  font-size: 2rem;
+  font-family: "Dancing Script", cursive;
 }
 
 .kaogaii-toggle {
@@ -85,6 +149,7 @@ body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  animation: toggleAnimation 0.5s ease-in-out forwards;
 }
 
 .kaogaii-toggle-layout {
@@ -139,4 +204,15 @@ body {
 
 .kaogaii-save_comment:hover {
   background-color: #3c74ce;
+}
+
+@keyframes toggleAnimation {
+  0% {
+    top: 48%;
+    filter: opacity(0);
+  }
+  100% {
+    top: 50%;
+    filter: opacity(1);
+  }
 }

@@ -13,7 +13,7 @@ def home():
 
 @app.route('/fanpage')
 def fanpage():
-    return render_template('test.html')
+    return render_template('fanpage.html')
 
 @app.route("/idol", methods=["POST"])
 def idol_post():
@@ -38,6 +38,26 @@ def idol_get():
     idol_list = list(db.idol.find({},{'_id':False}))
     return jsonify({'idol':idol_list})
 
+@app.route("/comment", methods=["POST"])
+def comment_post():
+
+    name_receive = request.form["name_give"]
+    comment_receive = request.form["comment_give"]
+    num_receive = request.form['num_give']
+
+    doc = {
+        'idol_num' : num_receive,
+        'name': name_receive,
+        'comment': comment_receive
+    }
+
+    db.comments.insert_one(doc)
+    return jsonify({'msg': '남기기 완료!'})
+
+@app.route("/comment", methods=["GET"])
+def comments_get():
+    comments_list = list(db.comments.find({},{'_id':False}))
+    return jsonify({'comments':comments_list})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

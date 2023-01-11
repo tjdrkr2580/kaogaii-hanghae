@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>가오가이 | 20조</title>
   </head>
+  <link rel="shortcut icon" href="./static/favicon.ico" />
   <link rel="stylesheet" href="./static/main.css" />
   <script src="https://code.jquery.com/jquery-latest.min.js"></script>
   <body>
@@ -11,10 +12,15 @@
     <!-- 이모지는 뭐 나중에 밥먹고 와야겠다 맛있겠당 -->
     <div class="kaogaii-wrapper">
       <header class="kaogaii-header">
-        <button onclick="toggle_box()" class="fan-box">팬명록 추가하기</button>
+        <span class="logo">Kaogaii</span>
+        <button onclick="toggle_box()" class="fan-box">가수 추가하기</button>
       </header>
+      <section class="padding-t"></section>
       <ul class="kaogaii-imoge"></ul>
-      <footer class="kaogaii-footer">© 2023. kaogaii</footer>
+      <section class="padding-b"></section>
+      <footer class="kaogaii-footer">
+        © 2023. <span class="logo">Kaogaii</span>
+      </footer>
       <section class="kaogaii-toggle">
         <div class="kaogaii-toggle-layout">
           <input
@@ -101,17 +107,6 @@
 
               $(".kaogaii-imoge").append(temp_html);
             }
-          },
-        });
-      }
-
-      function show_idols() {
-        $.ajax({
-          type: "GET",
-          url: "/fanpage",
-          data: {},
-          success: function (response) {
-            console.log(response);
           },
         });
       }
