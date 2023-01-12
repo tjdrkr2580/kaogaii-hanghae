@@ -9,6 +9,7 @@ font-family: 'Roboto', sans-serif; 영이 및 숫자 */
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: "Noto Sans KR", sans-serif;
   text-decoration: none;
   list-style: none;
 }
@@ -24,6 +25,7 @@ a {
 }
 
 img {
+  object-fit: cover;
   width: 100%;
   height: 75%;
 }
@@ -47,18 +49,23 @@ span {
   padding-top: 10rem;
 }
 
+.padding-t-t {
+  padding-top: 12rem;
+}
+
 .padding-b {
   padding-bottom: 10rem;
 }
 
 .kaogaii-header {
   z-index: 2;
+  min-width: 36rem;
   max-width: 80rem;
-  padding: 1rem 0;
+  padding: 1rem 3rem;
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  width: 80vw;
+  width: 90vw;
   height: 6rem;
   display: flex;
   justify-content: space-between;
@@ -74,6 +81,11 @@ span {
   -webkit-background-clip: text;
   font-size: 3.5rem;
   font-family: "Dancing Script", cursive;
+}
+
+button > a {
+  font-size: 1.6rem;
+  color: white;
 }
 
 .kaogaii-header > button:hover {
@@ -105,8 +117,7 @@ span {
 
 .kaogaii-imoge > li {
   padding: 0.5rem;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
-    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   cursor: pointer;
   margin: 0 auto;
   place-items: center;
@@ -119,11 +130,11 @@ span {
 }
 
 .kaogaii-imoge > li:hover {
-  filter: brightness(80%);
+  filter: brightness(90%);
 }
 
 .kaogaii-footer {
-  padding: 0 0 1rem 1rem;
+  padding: 0 0 2rem 1rem;
   font-size: 1.75rem;
 }
 
@@ -138,16 +149,17 @@ span {
 
 .kaogaii-toggle {
   max-width: 40rem;
-  background-color: yellow;
+  background-color: white;
   display: none;
   justify-content: center;
   flex-direction: column;
   gap: 1rem;
   width: 80vw;
   height: 30rem;
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 50%;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   transform: translate(-50%, -50%);
   animation: toggleAnimation 0.5s ease-in-out forwards;
 }
@@ -159,18 +171,29 @@ span {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
 }
 
 .kaogaii-toggle-layout > input {
-  margin: 0 auto;
-  width: 20rem;
+  width: 25rem;
   height: 4rem;
-  font-size: 1.25rem;
+  border: none;
+  padding: 0.4rem 0.6rem;
+  font-size: 1.15rem;
+  border-radius: 1rem;
+  color: rgb(150, 150, 150);
+  border: 0.05rem solid rgb(231, 230, 230);
+  transition: 0.25s border, 0.25s box-shadow;
+}
+
+.kaogaii-toggle-layout > input:focus {
   outline: none;
-  padding: 0.5rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-color: #b8a1e8;
 }
 
 .kaogaii-btns {
+  transform: translateY(5rem);
   display: flex;
   justify-content: space-around;
   align-self: center;
@@ -183,27 +206,27 @@ span {
   width: 7rem;
   border: 0;
   color: white;
-  font-size: medium;
+  border-radius: 1rem;
+  font-size: 1.3rem;
   cursor: pointer;
   border-radius: 0.2rem;
-  transition: 0.25s background-color;
+  transition: 0.25s filter;
 }
 
 .kaogaii-close_toggle {
-  background-color: #ea4236;
+  background-color: grey;
 }
 
 .kaogaii-close_toggle:hover {
-  background-color: #ad2f26;
+  filter: brightness(75%);
 }
 
 .kaogaii-save_comment {
-  background-color: #4286f5;
-  transition: 0.25s background-color;
+  background: linear-gradient(270deg, #5845ce 0%, #845cf5 46.87%, #bb65d2 100%);
 }
 
 .kaogaii-save_comment:hover {
-  background-color: #3c74ce;
+  filter: brightness(110%);
 }
 
 @keyframes toggleAnimation {
@@ -214,5 +237,147 @@ span {
   100% {
     top: 50%;
     filter: opacity(1);
+  }
+}
+
+.kaogaii-imoge-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  gap: 1.5rem;
+  max-width: 70rem;
+  animation: fly infinite 2s linear;
+}
+
+.kaogaii-imoge-info > img {
+  width: 30rem;
+}
+
+.kaogaii-imoge-info > .text {
+  display: flex;
+  align-items: center;
+  font-size: 1.75rem;
+  white-space: nowrap;
+}
+
+.kaogaii-imoge-info > .text > h1 {
+  font-size: 2rem;
+  background: linear-gradient(270deg, #5845ce 0%, #845cf5 46.87%, #bb65d2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+.kaogaii-inputs {
+  max-width: 30rem;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  align-self: center;
+}
+
+.kaogaii-inputs > input:first-child {
+  width: 100px;
+}
+
+.kaogaii-inputs > input {
+  width: 300px;
+  height: 4rem;
+  border: none;
+  padding: 0.4rem 0.6rem;
+  font-size: 1.15rem;
+  border-radius: 1rem;
+  color: rgb(150, 150, 150);
+  border: 0.05rem solid rgb(231, 230, 230);
+  transition: 0.25s border, 0.25s box-shadow;
+}
+
+.kaogaii-inputs > input:focus {
+  outline: none;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-color: #b8a1e8;
+}
+
+.kaogaii-inputs > button {
+  cursor: pointer;
+  align-self: flex-end;
+  width: 10rem;
+  height: 4.25rem;
+  font-size: 1.78rem;
+  border: none;
+  border-radius: 1.5rem;
+  background: radial-gradient(
+    circle at 10% 20%,
+    rgb(111, 111, 219) 0%,
+    rgb(182, 109, 246) 72.4%
+  );
+  color: white;
+  margin-bottom: 3rem;
+  transition: filter 0.25s;
+}
+
+.kaogaii-inputs > button:hover {
+  filter: brightness(110%);
+}
+
+.kaogaii-comments {
+  width: 80vw;
+  max-width: 50rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 5rem auto;
+  padding: 4rem 0;
+}
+
+.kaogaii-comments > .kaogaii-span {
+  align-self: center;
+  font-weight: normal;
+  width: 30rem;
+  background: linear-gradient(270deg, #5845ce 0%, #845cf5 46.87%, #bb65d2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  font-size: 3.5rem;
+  font-family: "Dancing Script", cursive;
+}
+
+.kaogaii-comments-name {
+  font-size: 1.8rem;
+  padding-left: 0.5rem;
+}
+
+.kaogaii-comments-name::after {
+  content: "";
+  height: 1rem;
+  width: 1rem;
+  background-color: yellow;
+}
+
+.kaogaii-comment {
+  color: rgb(99, 99, 99);
+  max-width: 400px;
+  padding-left: 0.8rem;
+  margin-top: 0.5rem;
+  font-size: 1.4rem;
+}
+
+@keyframes fly {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  75% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(0px);
   }
 }

@@ -1,24 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- <link rel="stylesheet" href="./static/main.css" /> -->
+    <link rel="shortcut icon" href="./static/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="./static/main.css" />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-    <title>Document</title>
+    <title>가오가이 | 방명록</title>
   </head>
   <body>
-    <header class="kaogaii-header">
-      <span class="logo">Kaogaii</span>
-      <button class="fan-box"><a href="/">메인으로</a></button>
-    </header>
-    <div class="kaogaii-wrapper"></div>
-    <div>
-      <input class="name" type="text" name="username" placeholder="이름" />
-      <input class="comment" type="text" name="comment" placeholder="코멘트" />
-      <button onclick="save_comment()" class="kaogaii-submit">입력</button>
-      <ul class="kaogaii-comments"></ul>
+    <div class="kaogaii-wrapper">
+      <header class="kaogaii-header">
+        <span class="logo">Kaogaii</span>
+        <button class="fan-box"><a href="/">메인으로 돌아가기</a></button>
+      </header>
+      <section class="padding-t-t"></section>
+      <div class="kaogaii-imoge-info"></div>
+      <ul class="kaogaii-comments">
+        <span class="kaogaii-span">Messages of love</span>
+        <div class="kaogaii-inputs">
+          <input
+            class="name"
+            type="text"
+            name="username"
+            placeholder="당신만의 닉네임"
+          />
+          <input
+            class="comment"
+            type="text"
+            name="comment"
+            placeholder="무슨 말을 전하시고 싶으신가요?"
+          />
+          <button onclick="save_comment()" class="kaogaii-submit">입력</button>
+        </div>
+      </ul>
+      <footer class="kaogaii-footer">
+        © 2023. <span class="logo">Kaogaii</span>
+      </footer>
     </div>
     <script>
       $(document).ready(function () {
@@ -41,8 +60,11 @@
               if (id == Number(a)) {
                 let name = rows[i]["idol_name"];
                 let link = rows[i]["idol_link"];
-                let temp_html = `<img src="${link}" alt="image"/> <h1>${name}</h1>`;
-                $(".kaogaii-wrapper").append(temp_html);
+                let temp_html = `<div class="text">
+                                    <h1>${name}</h1>님에게 마음을 전해보세요!
+                                    </div>
+                                  <img src="${link}" alt="image"/>`;
+                $(".kaogaii-imoge-info").append(temp_html);
               }
             }
           },
@@ -71,7 +93,6 @@
         let url_href = window.location.href;
         let url = new URL(url_href);
         let a = url.searchParams.get("id");
-
         $.ajax({
           type: "GET",
           url: "/comment",
@@ -85,9 +106,9 @@
               let name = idolNum[i]["name"];
               if (a == num) {
                 temp_html = `<li>
-                                  <div><h5>${name}</h5></div>
-                                  <div><h4>${comment}</h4></div>
-                                </li>`;
+                                <h2 class="kaogaii-comments-name">${name}</h2>
+                                <p class="kaogaii-comment">${comment}</p>
+                              </li>`;
                 $(".kaogaii-comments").append(temp_html);
               }
             }
